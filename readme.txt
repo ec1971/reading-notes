@@ -1,3 +1,1 @@
-This is a file
-
-Added something.
+CLRS notes
