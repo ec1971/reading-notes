@@ -75,7 +75,6 @@
     - sort in place
     - has tight code like insertion sort, so the hidden constant factor in its running time is small (access to array more closely packed?
     
-    
 **Heap & Priority queue**
 
 - Heap structure
@@ -111,9 +110,19 @@
 - the nlogn lower lower bound only applies to comparison sort. If we can gather information about the sorted order of the input by means other than comparing elements, we can beat the lower bound.
 - Counting sort
   - assumes that imput are in the set {0, 1, ..., k}
+    - iterate the array and count how many elements less than or equal to {0, ..., k} and place the elements accordingly.
   - sort n numbers in O(k + n) time
-  - when k = O(n), counting sort runs in linear time
+    - stable sort.
+    - when k = O(n), counting sort runs in linear time
 - Radix sort
 - Bucket sort
+  - assume that the input is drawn from a uniform distribution
 
 **The ith order statistic**
+- simultaneous minimum and maximum
+  - maintaining both min and max seen thus far and process elements in pairs, 3(n/2) comparisons in total.
+- slecting the ith smallest number in linear time
+  - modeled after quicksort
+  - each time partition the array and recursively call the procedure
+  
+### #chapter 10 - 14
