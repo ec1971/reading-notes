@@ -126,3 +126,19 @@
   - each time partition the array and recursively call the procedure
   
 ### #chapter 10 - 14
+- Hash Tables
+  - Performance: insert, search and delete
+    - worst case O(n), O(1) expected case.
+  - direct addressing
+    - feasible when we can afford to allocate an array that has one position for every possible key
+    - when the number of possible keys is huge, storing a table T of that size may be impractical and wasteful. In this case, a hash table requires much less storage than a direct address table - we hashes an element with K to slot h(k), in which h(k) is the hash value of k.
+  - How to deal with collision (when more than one key maps to the same array index)
+    - because |U| > m, there must be at least two keys that have the same hash value, thus avoiding collisions altogether is impossible, but **a well-designed, random looking hash function can minimize the number of collisions**.
+    - hashing with chaining
+      - place all the elements that hash to the same slot into the same linked list.
+    - open addrssing(all elements occupy the hash table itself)
+      - we successively examine (probe) the hash table until we find an empty slot in which to put the key. The sequence to probe depends upon the key being inserted.
+      - linear probing
+      - quatratic probing
+      - double hashing
+- Binary Seartch Tree (BST)
