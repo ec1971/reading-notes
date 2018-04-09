@@ -142,3 +142,22 @@
       - quatratic probing
       - double hashing
 - Binary Seartch Tree (BST)
+  - Tree walk - O(n)
+    - recursive traversal takes O(n) time since after initial call, the procedure call itself recursively exactly twice for each node in the tree - once for its left child and once for its right child.
+  - Querying, Tree_Min, Tree_Max(O(h))
+  - Successor of node x (the smallest key greater than x.key) - (O(h))
+    
+    (1) x has right tree.
+    ```cpp
+    if x.right != NIL
+        return Tree_Min(x.right)
+    ```
+    
+    (2) x does not has right tree. 
+    ```cpp
+    go up the tree from x until we find a node that is the left child of its parent. 
+      return the parent.
+    ```
+    
+    In this case, the successor Y is the lowest ancestor of x whose left child is also an ancestor of x.
+- deletion, insertion(O(h))
