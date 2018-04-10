@@ -1,0 +1,2 @@
+- divide and conquer (div/q)
+  - closest points in plane problem: div/q can reduce it to nlogn, but use randomization can improve the running to to O(n)
