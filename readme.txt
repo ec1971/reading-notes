@@ -1,1 +1,3 @@
-CLRS notes
+- Algorithms-related notes
+  - CLRS
+  - Algorithm design
