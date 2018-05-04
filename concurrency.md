@@ -31,4 +31,16 @@
       - reader-writer problem
         - readers may share object with unlimited number of other readers but writers might want to have exclusive access to the object (inspect tickets assignments v. booking tickets)
         - see the server example for reference
-  - using threads for parallelism
+ - using threads for parallelism
+   - a parallel program is a concurrent program running on multiple processors
+   - might even be slow as synchronization overhead is expensive and should be avoided
+   - in the csapp example, run time linearly decrease until we reach 4 threads ( = number of cores of the machine), then it actually increas - that's because the overhead of context switching multiple threads on the same core - when it's less or equal than four, each thread is running on separate core.
+ - thread safe: always produce correct results when called repeatedly from multiple concurrent threads
+   - reasons why thread might not be safe:
+      - do not protect shared variable?
+      - keep state across multiple invocations (the rand example on book)
+      - functions that return a pointer to a static variable?
+   - reentrant functions (a subset of thread-safe functions): safe because they do not reference any shared data
+ - deadlock
+    - when a collection of threads is blocked, waiting for a condition that will never be true
+    - may be caused by improper mutext ordering
