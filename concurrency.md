@@ -20,6 +20,15 @@
   - sychronizing using semaphores
     - semaphore, a global variable with a nonnegative interger value that can only be manipulated by two special operations: P and V
     - how it works
-    - P(s): if s is nonzero P decrements s and return immediately; if s is zero, then suspend the thread until s becomes nonzero (s only becomes nonzero when the thread that's running called V); then thread is restarted by that V operation.
-    - V(s): increments s by 1 - it restarts exactly one of the threads that's been waiting
-    - **Mutex**: when used to protect shared variables it's called **binary** semaphore because its value is always 0 or 
+    - mutual exclusion (mutex)
+      - P(s) - Locking the mutex: if s is nonzero P decrements s and return immediately; if s is zero, then suspend the thread until s becomes nonzero (s only becomes nonzero when the thread that's running called V); then thread is restarted by that V operation.
+      - V(s) - unlocking the mutex: increments s by 1 - it restarts exactly one of the threads that's been waiting
+      - **Mutex**: when used to protect shared variables it's called **binary** semaphore because its value is always 0 or 
+    - schedule shared resources
+      - producer-consumer problem
+        - only ensuring mutual access is not enough - also need to schedule usage (can't insert when buffer is full)
+        - usually three semaphores - one mutex, one slots and one items
+      - reader-writer problem
+        - readers may share object with unlimited number of other readers but writers might want to have exclusive access to the object (inspect tickets assignments v. booking tickets)
+        - see the server example for reference
+  - using threads for parallelism
