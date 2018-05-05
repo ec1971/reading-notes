@@ -54,3 +54,17 @@
       - functions that return a pointer to a static variable?
    - reentrant functions (a subset of thread-safe functions): safe because they do not reference any shared data
 
+### implementation 
+- design process
+  - high level methodology
+    - decompose the problem into objects
+    - for each object
+      - define clean interface
+      - identify internal state and invariants to support that interface
+      - implement methods to manipulate state
+  - specific steps
+    - add lock
+    - add code to acquire and release the lock
+    - identify and add condition variables
+    - add loops to wait using the condition variables
+    - add signal and broadcast calls
