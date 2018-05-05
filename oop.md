@@ -1,3 +1,4 @@
+# C++ specifics
 - access specifier 
   - access specifier in base class
     - public member
@@ -34,3 +35,6 @@
   
 - virtual function dustructor
   - class used as the root of an inheritance hierarchy almost always define a virtual destructor
+# OOD design
+- singleton
+  - estricts the instantiation of a class to one object. This is useful when exactly one object is needed to coordinate actions across the system. 
