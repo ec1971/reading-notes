@@ -2,11 +2,11 @@
   ## with processes
   ## with I/O multiplexing
   
-  ## with thread
-- basic features
+  ## cwith thread
+### basic features
   - passes control via context switch
   - posix threads(Pthreads) is the standard interface
-- all threads share
+### all threads share
   - entire virtual address space of that process (code, data, heap, shared libraries, open files)
   - each thread has its own separate thread context
   - thread ID
