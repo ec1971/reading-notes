@@ -1,6 +1,11 @@
-# three basic approach for synchronization
-## with processes
-## with I/O multiplexing (asynchronous I/O and event-driven programming)
+# concurrency 
+## three basic approach for synchronization
+  - concurrency with processes
+  - concurrency with I/O multiplexing (asynchronous I/O and event-driven programming)
+  - concurrency with data parallel programming(e.g. MapReduce)
+  - concurrency with thread
+
+## data parallel programming(e.g. MapReduce)
 
 ## concurrency with thread
 ### basic features
@@ -15,13 +20,16 @@
 - (4) managing i/o devices: when one task is waiting for I/O, the processor can make progress on a different task. 
   - **processors are often much faster than I/O systems** with which they interact, so keeping the processor idle during I/O would waste much of its capacity - the latency to read from disk can be tens of milliseconds, enough to execute more than 10 million instructions on a modern processor.
   
-### thread v. other similar concept
+### concept clarifications
 - thread v. process
   - related to each other but fundamentally different; a process can be thought of as an instance of a program in execution. it is an independent entity to which system resources are allocated. each process is executed in a separate address space, and one cannot access the variables and data structures of another process. if we'd like to share resources, inter-process communications have to be used - e.g., pipes, files, sockets, etc.
   - a thread exists within a process and share the process's resources. it is a particular execution path of a process. when one thread modifies a process resource, the change is immediately visible to sibling threads.
   
 - thread v. interrupt handler
   - share some resemblance as both are single sequence of instructions that executes from beginning to end, but interrupt handler is not independently schedulable - it is triggered by a hardware I/O event.
+  
+- kernel thread v. process thread
+  - we are usually talking about multiple threads per process where each thread can make system calls into the kernel, but kernel itself can also benefit from using multiple threads, each runs with the privileges of the kernel.
 
 ### what do threads whare and do not share?
 - they all share the entire virtual address space of that process (code, data, heap, shared libraries, open files)
@@ -52,8 +60,10 @@
   - producer-consumer problem
     - only ensuring mutual access is not enough - also need to schedule usage (can't insert when buffer is full)
     - usually three semaphores - one mutex, one slots and one items
-  - reader-writer problem
+    
+  - reader-writer problem (frequent read  + infrequent write)
     - readers may share object with unlimited number of other readers but writers might want to have exclusive access to the object (inspect tickets assignments v. booking tickets)
+    - very common in databases where we need to support faster search queries over the database while also supporting less frequent database update.
     - see the server example for reference
 ### deadlock
   - when a collection of threads is blocked, waiting for a condition that will never be true
