@@ -6,6 +6,13 @@
   - concurrency with thread
 
 ## data parallel programming(e.g. MapReduce)
+### preliminary
+- idea is to apply commputation in parallel across an entire data set at the same time, with each thread operating on independent data elements. 
+- The work on every data item must complete before moving onto the next step
+- for this scheme to work, we need an efficient way to check whether all n threads have finished their work - synchronization barrier. 
+  - one operation: checkin
+  - a thread calls checkin when it has completed its work;
+  - no thread may return from checkin until all n threas have checked in.
 
 ## concurrency with thread
 ### basic features
@@ -66,9 +73,45 @@
     - very common in databases where we need to support faster search queries over the database while also supporting less frequent database update.
     - see the server example for reference
 ### deadlock
-  - when a collection of threads is blocked, waiting for a condition that will never be true
+- preliminary 
+  - occur anytime a thread waits for an event that cannot happen because of a cycle of waiting for a resource held by the first thread (resource shoud be broadly construed)
   - may be caused by improper mutext ordering
+  - deadlock is a form of starvation (when a thread fails to make progress for an indefinite period of time);
+- dining philosopher 
+  - why deadlock occur (if all philosophers pick up the left one at the same time)
+    - bounded resources: not enough chopsticks for all philosopher
+    - no preemption: once a philosopher picks up a chopstick, she does not release it until she is done eating, even if that means no one will ever eat
+    - wait while holding: when a philosopher needs to wait for a chopstick, she continues to hold onto any chopsticks she has already picked up
+    - circular waiting: there is a set of waiting threads such that each thread is waiting for a resource held by another (here, every philosopher is waiting for chopstick holding by another)
+   
+  
+  - how to prevent
+    - examine why deadlock occur and prevent one of its necessary condition
+      - bounded resources: provide sufficient resources
+      - no preemption:preempt resources - forcibly reclaim resources held by a thread
+      - curcular waiting: in nested waiting, restructure the modlue's code so that no locks are held when calling other modules.
+        - identify an ordering among locks and only acquire locks in that order
+      - wait-while-holding: wait until all needed resources are available and then to acquire them atomically at the beginning of an operation, rather than incrementally as the operation proceeds.
+      
+    - allow "undo" actions that take a system into a deadlock.
+  - detecting deadlock
+    - the detection mechanism can be conservative - it can trigger the repair if we might be in a deadlock state - risks a false positive where a non-deadlocked thread is incorrectly classofied as deadlocked. whether to enforce this conservative rule depends on the overhead of the repair operation.
+    - specifically: examine the graph of threads and associated resoucres: 
+      - if there are several resources and only one thread can hold each resource at a time, we can consider each thread and resource as node. There is a directed edge from a resource to a thread if the resource is owned by the thread and from a thread to a resource if the thread is waiting for resource ->there is a deadlock if and only if there is a cycle in such a graph.
+      - if there are multiple instances of some resources - a cylce is necessary but not sufficient
+    - or, a mechanism that's similar to banker's algorithms.
   
+  - recovering from deadlock
+    - proceed without the resources
+    - transactions: rollback and retry
+      - choose one or more victim threads, stop them, and undo their actions, and let other threads proceed
+      - once the deadlock is broken and other thrads have completed some or all of their work, the victim thread is restarted
+    
+    
+    
+    
+    
+    
 ### parallelism
    - a parallel program is a concurrent program running on multiple processors
    - might even be slow as synchronization overhead is expensive and should be avoided
