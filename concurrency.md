@@ -1,18 +1,28 @@
 # three basic approach for synchronization
-  ## with processes
-  ## with I/O multiplexing
-  
-  ## concurrency with thread
+## with processes
+## with I/O multiplexing
+
+## concurrency with thread
 ### basic features
   - passes control via context switch
   - posix threads(Pthreads) is the standard interface
   
+### why use thread?
+- expressing natural concurrency by writing each logically concurrent tasks as a separate thread (update screen, fetch data, receive new inputs, etc)
+- improve user responsiveness: creates threads to perform work in the background, that way user interface can remain responsive to further commands, regardless of the complexity of the user request.
+- exploiting multiple processors
+- managing i/o devices: when one task is waiting for I/O, the processor can make progress on a different task. 
+- **processors are often much faster than I/O systems** with which they interact, so keeping the processor idle during I/O would waste much of its capacity - the latency to read from disk can be tens of milliseconds, enough to execute more than 10 million instructions on a modern processor.
+  
+### thread v. processes?
+- 
+
 ### what do threads whare and do not share?
-  - they all share the entire virtual address space of that process (code, data, heap, shared libraries, open files)
-  - but each thread has its own separate thread context
-    - thread ID
-    - stack, stack pointer, program counter
-    - general-purpose register values (never shared)
+- they all share the entire virtual address space of that process (code, data, heap, shared libraries, open files)
+- but each thread has its own separate thread context
+  - thread ID
+  - stack, stack pointer, program counter
+  - general-purpose register values (never shared)
    
 ### synchronizing 
   -  what is synchronizing error and why does it occur? 
