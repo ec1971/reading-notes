@@ -1,26 +1,32 @@
 # three basic approach for synchronization
 ## with processes
-## with I/O multiplexing
+## with I/O multiplexing (asynchronous I/O and event-driven programming)
 
 ## concurrency with thread
 ### basic features
-  - passes control via context switch
-  - posix threads(Pthreads) is the standard interface
+- Definition: a single execution sequence that represents a separately schedulable task.
+- passes control via context switch - os include a thread scheduler that can switch b/w threads that are running and those that are ready but not running. there are many possible interleavings of a program with multiple threads. should not make assumptions about relative speed or sequence.
+- posix threads(Pthreads) is the standard interface
   
 ### why use thread?
-- expressing natural concurrency by writing each logically concurrent tasks as a separate thread (update screen, fetch data, receive new inputs, etc)
-- improve user responsiveness: creates threads to perform work in the background, that way user interface can remain responsive to further commands, regardless of the complexity of the user request.
-- exploiting multiple processors
-- managing i/o devices: when one task is waiting for I/O, the processor can make progress on a different task. 
-- **processors are often much faster than I/O systems** with which they interact, so keeping the processor idle during I/O would waste much of its capacity - the latency to read from disk can be tens of milliseconds, enough to execute more than 10 million instructions on a modern processor.
+- (1) expressing natural concurrency by writing each logically concurrent tasks as a separate thread (update screen, fetch data, receive new inputs, etc)
+- (2) improve user responsiveness: creates threads to perform work in the background, that way user interface can remain responsive to further commands, regardless of the complexity of the user request.
+- (3) exploiting multiple processors
+- (4) managing i/o devices: when one task is waiting for I/O, the processor can make progress on a different task. 
+  - **processors are often much faster than I/O systems** with which they interact, so keeping the processor idle during I/O would waste much of its capacity - the latency to read from disk can be tens of milliseconds, enough to execute more than 10 million instructions on a modern processor.
   
-### thread v. processes?
-- 
+### thread v. other similar concept
+- thread v. process
+  - related to each other but fundamentally different; a process can be thought of as an instance of a program in execution. it is an independent entity to which system resources are allocated. each process is executed in a separate address space, and one cannot access the variables and data structures of another process. if we'd like to share resources, inter-process communications have to be used - e.g., pipes, files, sockets, etc.
+  - a thread exists within a process and share the process's resources. it is a particular execution path of a process. when one thread modifies a process resource, the change is immediately visible to sibling threads.
+  
+- thread v. interrupt handler
+  - share some resemblance as both are single sequence of instructions that executes from beginning to end, but interrupt handler is not independently schedulable - it is triggered by a hardware I/O event.
 
 ### what do threads whare and do not share?
 - they all share the entire virtual address space of that process (code, data, heap, shared libraries, open files)
-- but each thread has its own separate thread context
-  - thread ID
+- DO NOT SHARE (TCB - thread control block: each thread has its own separate thread context)
+  - thread ID and other thread associated metadata
   - stack, stack pointer, program counter
   - general-purpose register values (never shared)
    
