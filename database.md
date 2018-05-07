@@ -4,7 +4,14 @@
   - A field is a column in a table that is designed to maintain specific information about every record in the table.
 - table
   - A database most often contains one or more tables. Each table is identified by a name (e.g. "Customers" or "Orders"). Tables contain records (rows) with data.
-   
+- primary key v. foreign key
+  - A FOREIGN KEY is a key used to link two tables together. it is a field (or collection of fields) in one table that refers to the PRIMARY KEY in another table.
+
+
+- normalized database v. denormalized database
+  - normalized database minimized redundancy
+  - denormalized store redundant data to optimize read time
+
 ## basic command
 - SELECT: extracts data from a database
   ```sql
