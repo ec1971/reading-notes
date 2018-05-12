@@ -124,7 +124,11 @@
    - reentrant functions (a subset of thread-safe functions): safe because they do not reference any shared data
 
 ### LOCK DESIGN & IMPLEMENTATION  
-
+- consideration
+  - safe
+  - efficiency
+  - prevent startving (e.g. FIFO scheme)
+  - deadlock
 - **high level methodology**
   - decompose the problem into objects
     - in particular, what's the shared shared object?
@@ -147,6 +151,7 @@
     - there is no single right answer. you can usually do it multiple ways
     
   - add loops to wait using the condition variables
+    - might wake up even w/o signal, or condition no longer true when the waiting thread resumes execution; this is to ensure that a thread always check condition before preceeding
     ```CPP
     while(!workAvailable()){
       cond.wait(&lock);
@@ -154,4 +159,23 @@
     assert(workAvailable());
     ```
   - add signal and broadcast calls
-
+  
+- CASE STUDIES
+  - RWLock
+    - mutual exclusion = readers v. writers & writers v. writers
+    - need to decided whether reader-preferred or writer-preferre
+    
+  - synchronization barrier for MapReduce(checkin)
+    - simple design
+      - one lock for checkin();
+      - one condition variable - all checkin
+      - key is to include both wait & broadcast in a single function
+      - problem is that it can't revert back to its initual state, thus can't be re-used.
+    - re-useable design
+      - one lock + two condition variable - all checkin & all leaving
+      - the nth thread to leave reset the allcheckedin variable; the nth thread to checkin reset the allLeft varible.
+      
+  - bounded queue
+    - how do we prevent starving by implementing FIFO scheme?
+      - create one condition variable for each waiting thread
+      
