@@ -1,3 +1,6 @@
+# OS BOOK PART I
+*NEED TO RE-READ THE KERNEL ABSTRACTION PART*
+
 ## RANDOM USEFUL NOTES
 - many core ideas in modern os have become widely applied throughout computer science.
 - Software engineers use many of the same technologies and design patterns as those used in operating systems to build other complex systems. 
@@ -81,11 +84,16 @@
     - cloud services often distribute their work across different machines. What abstractions should cloud software provide to help services coordinate and share data between their various activities?
   
     
+## notes  
+ - issue arising when you allows running of **third-party script**
+  - become more powerful and widely used if you allow user to customize them, but doing so raise security issue
+  - use "process" to solve this: allow other process to run with permission, with all dangerous operations disabled.
+    - privileged instructions
+    - memory protection
+    - timer interrupts
     
     
-    
-    
-    
+ 
     
     
     
