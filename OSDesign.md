@@ -106,3 +106,9 @@
 - how to protect unsafe memory access?
   - base/bound registers (using virtual addresses) - processor check if the memory is within boundary before each instruction, causing exception if violated.
     - efficiency issue arises: since applications touches only their own memory, data sharing become less efficient
+    
+# OS BOOK PART II
+
+## NOTES
+- the design of shared objects can have large impact on multiprocessor performance - lock protecting a frequently accessed shared object can become a bottleneck.
+
