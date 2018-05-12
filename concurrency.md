@@ -201,3 +201,65 @@
   - cf. RWlock
     - because of the serial access of the readers/writers control structure, the synchronization process can be a bottleneck (esp when the critical section is short - synchronization overhead is huge)
     - RCU solves this by reducing overhead for read at the cost of overhead for write
+    
+# SCHEDULING
+- overview
+  - key is to form an analytic framework to think about scheduling problems
+  - applies to any scare resoucres
+  - most scheduling scheme combines aspects of different schudling policies.
+- Consideration  
+  - throughput
+  - response time
+  - scheduling overhead
+  - fairness
+  - starvation
+  - predictability
+  - cache reuse
+    - scheduled on this processor and have content cached on it but scheduled on another next time?
+- scheduling policy
+  - FIFO
+    - strengths
+      - minimizes overhead - switching between tasks only when each one completes
+      - great throughput since overhead is minimized
+      - fair
+    - weakness
+      - but response time might be huge if short tasks happen to arive after a long one (no such issue if all requests are for small amounts of data)
+        - cf. SJF
+    - application
+      - memcached of webservices
+  - shortest-job-first (SJF)
+    - strengths
+      - minimized average response time
+    - weakness
+      - not practical->usually do not have info about how much time each task needs
+      - variance of response time can be huge
+        - trade off of average response time v. variance of response time
+        - starving and frequent context switch
+    - application
+      - web service for static content - where you are able to predict bandwidth
+    
+  - round robin
+    - idea is to assigned to each process in equal portions and in circular order, handling all processes without priority
+    - strengths
+      - best to achieve predictable, stable rate of progress
+    - weak
+      - tricky to decide time slice ->minimize overhead
+    - application
+      - web service for static content - where you are able to predict bandwidth
+ 
+ 
+  - Multi-level feedback
+    - extention of round robin: tasks of high priority preempt that of low ones, but tasks of same priority are scheduled based on round robin
+
+- what if there are multiple processors
+  - maximize cache efficiency
+    - **affinity scheduling**: once a thread is scheduled on a processor, it is returned to the same one when it is re-scheduled, maximizing cache reuse
+
+
+
+
+
+
+
+
+
