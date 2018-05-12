@@ -210,12 +210,17 @@
 - Consideration  
   - throughput
   - response time
+    - avg response time v. variance of response time
   - scheduling overhead
   - fairness
   - starvation
+    - don't want one user monopolize resources
   - predictability
   - cache reuse
     - scheduled on this processor and have content cached on it but scheduled on another next time?
+  - balance load
+  - energy constraints
+    
 - scheduling policy
   - FIFO
     - strengths
