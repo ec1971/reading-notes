@@ -11,14 +11,25 @@
   - efficient
   - resilient
   
-- **evaluating the system**
+- **evaluating the system: DESIGN TRADOFFS**
   - reliability
   - availability
+    - the percentage of time that the system is usable
+    - two factors
+      - MTTF: mean time to failure
+      - MTTR: mean time to repair
   - security
+    - cannot be compromised by malicious attacker
+    - privacy
   - portability
     - easy to move to a new hardware platform?
   - performance
-    - responsive? overhead?
+    - overhead
+    - efficiency
+    - throughput: rate with which system completes tasks
+    - response time
+    - fairness
+    - performance predictability
     
 - [more specific]design consideration (mainly arising out of the need for multi-tasking)
   - resource management/allocation
