@@ -85,18 +85,24 @@
   
     
 ## notes  
- - issue arising when you allows running of **third-party script**
-  - become more powerful and widely used if you allow user to customize them, but doing so raise security issue
-  - use "process" to solve this: allow other process to run with permission, with all dangerous operations disabled.
+- issue arising when you allows running of **third-party script**
+  - become more powerful and widely used if you allow user to customize them, but doing so raise security issue  
+  - "process": execution of application program with restricted rights -> all dangerous operations disabled.
     - privileged instructions
     - memory protection
     - timer interrupts
-    
-    
- 
-    
-    
-    
-    
-    
-    
+  
+- privileged instruction: design pattern of kernel mode
+  - kernel is necessarily trusted to do anything with the hardware; everything else is run in a restricted environment with less than complete access to the full power of the hardware.
+  
+  - speed/safety trade-off
+    - key question is how to ensure safety while at the same time running application code at high speed.
+    - how to protect?if
+      - if we ignore performance/efficience we of course could have the kernel simulate the instructions and see if it is permitted. only execute it if it is, otherwise cause exception to handler.
+      - a faster way is to implement this check directly on hardware (the checking bit is turned off in kernel mode)
+      - another consideration is how to prevent user from directly chaging their privilege level
+
+
+- how to protect unsafe memory access?
+  - base/bound registers (using virtual addresses) - processor check if the memory is within boundary before each instruction, causing exception if violated.
+    - efficiency issue arises: since applications touches only their own memory, data sharing become less efficient
