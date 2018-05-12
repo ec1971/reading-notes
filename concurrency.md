@@ -123,8 +123,8 @@
       - functions that return a pointer to a static variable?
    - reentrant functions (a subset of thread-safe functions): safe because they do not reference any shared data
 
-### LOCK DESIGN & IMPLEMENTATION  
-#### DESIGN PATTERN
+## LOCK DESIGN & IMPLEMENTATION  
+### DESIGN PATTERN
 - **high level methodology**
   - consideration
     - safe
@@ -162,7 +162,7 @@
     ```
   - add signal and broadcast calls
   
-#### CASE STUDIES
+### CASE STUDIES
 - RWLock
   - mutual exclusion = readers v. writers & writers v. writers
   - need to decided whether reader-preferred or writer-preferre
@@ -180,4 +180,24 @@
 - bounded queue
   - how do we prevent starving by implementing FIFO scheme?
     - create one condition variable for each waiting thread
+    
+### MULTIPLE LOCKS
+- Consideration
+  - performance/efficiency
+    - avoid bottleneck
+  - startving
+  - deadlock
+- strategy for using multiple locks to decrease lock contention 
+  - fine-grained locking:
+    - partition an object's state into different subsets and each protected by a different lock
+    - e.g. one lock per bucket; partition heap to separate memory region
       
+  - pre-processor data structure
+    - partition based on number of processor
+  - ownership design patter
+  - staged architecture
+- RCU (read-copy-update) locks
+  - for read heavy database - frequently read but ocassionally update
+  - cf. RWlock
+    - because of the serial access of the readers/writers control structure, the synchronization process can be a bottleneck (esp when the critical section is short - synchronization overhead is huge)
+    - RCU solves this by reducing overhead for read at the cost of overhead for write
