@@ -123,17 +123,35 @@
       - functions that return a pointer to a static variable?
    - reentrant functions (a subset of thread-safe functions): safe because they do not reference any shared data
 
-### implementation 
-- design process
-  - high level methodology
-    - decompose the problem into objects
-    - for each object
-      - define clean interface
-      - identify internal state and invariants to support that interface
-      - implement methods to manipulate state
-  - specific steps
-    - add lock
-    - add code to acquire and release the lock
-    - identify and add condition variables
-    - add loops to wait using the condition variables
-    - add signal and broadcast calls
+### LOCK DESIGN & IMPLEMENTATION  
+
+- **high level methodology**
+  - decompose the problem into objects
+    - in particular, what's the shared shared object?
+  - for each object
+    - define clean interface
+    - identify internal state and invariants to support that interface
+    - implement methods to manipulate state
+    
+- **DESIGN PROCESS**
+  - add lock
+    - start with the most simple design - each shared object includes exactly one lock
+  - [WHEN TO ACQUIRE/RELEASE LOCK?]
+    - common design is to acquire the lock at the start of each public method and release it at the end of each public method
+      - two advantages: (1) easy to reason about state of lock(2) ensure that the lock is already called when each private method is called
+      - other design may speed up the program (e.g. avoid acquiring lock in some or acquiring only in parts of some methods), but it's error prone - until you are absolutely sure you are right, don't do it 
+      
+  - [HOW MANY CONDITION VARIABLES YOU NEED?]
+    - consider each method and ask, "when can this method wait?" 
+    - a common approach is to add a condition variable for each situation in which the method must wait
+    - there is no single right answer. you can usually do it multiple ways
+    
+  - add loops to wait using the condition variables
+    ```CPP
+    while(!workAvailable()){
+      cond.wait(&lock);
+    }
+    assert(workAvailable());
+    ```
+  - add signal and broadcast calls
+
