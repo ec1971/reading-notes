@@ -2,10 +2,37 @@
 
 **Divide and conquer**
 - analyze run-time of recursion 
-  - make sure you at least have some idea of what the master theorem is
-  - common recursions and their run time
+  - master theorem
+    - Create “a” subproblems of x, each having size “n/b”, f(n) is the time to create the subproblems and combine their results
+    - T(n) = aT(n/b) + f(n); 
+    - three cases : look at f(n) and compare it with n<sup>logb<sup>a - e</sup></sup>; 
+      - potential answer: n<sup>logb<sup>a</sup></sup>logn, n<sup>logb<sup>a</sup></sup>, f(n);
+    - **case 1** (Work to split/recombine a problem comparable to subproblems):
+      - if f(n) = n<sup>logb<sup>a</sup></sup> : **T(n) = n<sup>logb<sup>a</sup></sup>logn**
+      - e.g. mergesort-> T(n) = 2T(n/2) + O(n)
+        - n<sup>logb<sup>a</sup></sup> = n<sup>log2<sup>2</sup></sup> = n -> T(n) = nlogn
+      - e.g. binary search->T(n) = T(n/2) + O(1)
+        - n<sup>logb<sup>a</sup></sup> = n<sup>log2<sup>1</sup></sup> = 1; T(n) = 1 * logn
+        
+    - **case 2** (Work to split/recombine a problem dwarfed by subproblems):
+      - if f(n) = O(n<sup>logb<sup>a - e</sup></sup>): **T(n) = n<sup>logb<sup>a</sup></sup>**
+             
+    - **case 3** (Work to split/recombine a problem dominates subproblems):
+      - if f(n) = omega(n<sup>logb<sup>a + e</sup></sup>): **T(n) = f(n)**
+      - e.g. partition search(see below)
+      - e.g. binary tree traversal 
+    
+  - common recursions and their run time
     - T(n) = 2T(n/2) + O(n): O(nlogn); //e.g. merge sort
     - T(n) = 2T(n/2) + O(1): O(n);
+    - T(n) = T(n/2) + O(n): O(n)--> partition serch;
+    
+    
+    
+    
+    
+    
+    
 - merge sort
   - T(n) = 2T(n/2) + cn (two sub-problems, each of 1/2 of original size)
   - running time for each merge is O(n) - at most n comparisions
