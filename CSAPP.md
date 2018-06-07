@@ -19,5 +19,14 @@
     - a process is the op's abstraction for a running program
     - provide the illusion that (1) the program is the only one running on the system; (2) the program appear to have exclusive use of both the processor, main memory, and the I/O devices; (3) the processor appears to execute the instruction in the program one after the other without interruption. (4) code and data of the program appear to be the only objects in the system's memory.
     - run concurrently means instructions of one process are interleaved with instructions of another. the OP performs this by context switching.
+    - thread
+      - see thread chapter
+      
   - virtual memory
+    - the abstraction that provide the illusion that each process has exclusive use of the main memory
   - files
+    - a sequence of bytes. a lot of things are modeled as file.
+    - provide applications with a uniform view of all the varied I/O devices that might be contained in the system.
+    
+**network**
+ - can be seen as just another I/O device to copy information from one machine to another via network.
