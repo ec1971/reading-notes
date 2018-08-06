@@ -3,4 +3,4 @@
 - Algorithm design
 - C++ Primer
 
-![alt notes](https://github.com/liujingchao0519/PanoLinks/blob/master/screenshot/Home.png)
+![alt notes](https://github.com/liujingchao0519/reading-notes/blob/master/pictures/notes.jpg)
