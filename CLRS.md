@@ -196,6 +196,20 @@
 - rb-tree
   - How it ensures the balance?
     - by constraining the node colors on any simple path from the root to leaf, it ensures that no such path is more than twice as long as any other.
+    
+- trie
+  - intuition
+    - if we store each key in binary tree ->need MlogN to search for a particular key
+      - M length of each key
+      - N = numbers of key
+    - with trie, however, we can do the search in O(M) times
+  - features
+    - position in the tree defines the key with which it is associated
+    - all descendants have a common prefix
+    - root is associated with empty string
+  - structure
+    - array of pointers to its children(max=26)
+    - bool indicating the end of the word
 
 
 ### #chapter 15 (Dynamic Programing)
