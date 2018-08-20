@@ -265,6 +265,9 @@
     as each vertex is finished, insert it onto the front of a linked list
     return the linked list.
     ```
+  - remember to detect if there is cycle
+    - color the nodes in three state: -1, 0, 1: there is a cycle when you visit a node when it is 0 (in progress)
+   
 - Miminum Spanning Tree(MST)
   - definition
     - find a subset of T among E that connects all vertices and the W(T) is minimized.
