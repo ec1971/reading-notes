@@ -12,4 +12,6 @@
 ### commit
 - --amend //amend last commit
 
-## branching
+## working with remote
+### push to remote
+- git push -u origin master//the -u here set upstream
