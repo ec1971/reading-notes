@@ -259,6 +259,16 @@
 - what if there are multiple processors
   - maximize cache efficiency
     - **affinity scheduling**: once a thread is scheduled on a processor, it is returned to the same one when it is re-scheduled, maximizing cache reuse
+    
+    
+    
+- first
+  - second
+    - third
+```python
+def func():
+    return 5
+```
 
 
 
